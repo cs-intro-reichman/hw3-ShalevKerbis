@@ -28,22 +28,74 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
+		String newString1 = preProcess(str1);
+		String newString2 = preProcess(str2);
+		boolean isAnagram = true;
+		String finalString1 = "";
+		String finalString2 = "";
+		
+		//remove spaces
+		for (int i = 0 ; i < newString1.length() ; i++){
+			if (newString1.charAt(i) != 32){
+				finalString1 = finalString1 + newString1.charAt(i);
+			}
+		}
+		for (int i = 0 ; i < newString2.length() ; i++){
+			if (newString2.charAt(i) != 32){
+				finalString2 = finalString2 + newString2.charAt(i);
+			}
+
+		}
+		System.out.println(finalString1);
+		System.out.println(finalString2);
+
+		if (finalString1.length() != finalString2.length()){
+			return false;
+		}
+
+		for (int i = 0 ; i < finalString1.length() ; i++){
+			char current = finalString1.charAt(i);
+			int index = finalString2.indexOf(current);
+
+			if (index != -1){
+				finalString2 = finalString2.substring(0, index) + finalString2.substring(index + 1);
+			} else {
+				return false;
+			}
+		}
+
+		if (finalString2.length() == 0){
+			isAnagram = true;
+		}
+		return isAnagram;
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
+		String newString = "";
+		for (int i = 0 ; i < str.length() ; i++){
+			if (str.charAt(i) >= 65 && str.charAt(i) <= 90){
+				newString = newString + (char)(str.charAt(i) + 32);
+			} else if ((str.charAt(i) >= 97 && str.charAt(i) <= 122) || str.charAt(i) == 32){
+				newString = newString + str.charAt(i);
+			}
+		}
+		return newString;
 	} 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		preProcess(str);
+		String randomString = "";
+		while (str.length() > 0){
+			int index = (int) (Math.random() * (str.length()));
+			char selectedChar = str.charAt(index);
+			str = str.substring(0, index) + str.substring(index + 1);
+			randomString = randomString + selectedChar;
+		}
+		return randomString;
 	}
 }
