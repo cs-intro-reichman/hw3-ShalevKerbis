@@ -46,8 +46,6 @@ public class Anagram {
 			}
 
 		}
-		System.out.println(finalString1);
-		System.out.println(finalString2);
 
 		if (finalString1.length() != finalString2.length()){
 			return false;
